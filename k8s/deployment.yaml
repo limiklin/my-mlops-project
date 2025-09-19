@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traffic-accident-deployment
+  labels:
+    app: traffic-accident
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traffic-accident
+  template:
+    metadata:
+      labels:
+        app: traffic-accident
+    spec:
+      containers:
+      - name: traffic-accident
+        image: limiklin/traffic-accident:latest   # Docker Hub 이미지
+        ports:
+        - containerPort: 5000
