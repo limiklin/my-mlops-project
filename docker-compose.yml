@@ -1,0 +1,17 @@
+services:
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v3.3.2
+    container_name: mlflow
+    environment:
+      - MLFLOW_ENABLE_LOGGED_MODELS=true
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./mlruns:/mlflow/mlruns
+      - ./mlflow.db:/mlflow
+    command: >
+      mlflow server
+      --backend-store-uri sqlite:////mlflow/mlflow.db
+      --artifacts-destination /mlflow/mlruns
+      --host 0.0.0.0
+      --serve-artifacts

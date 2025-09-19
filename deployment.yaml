@@ -1,0 +1,21 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accident-predictor-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: accident-predictor
+  template:
+    metadata:
+      labels:
+        app: accident-predictor
+    spec:
+      containers:
+      - name: api-server
+        image: accident-predictor:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
